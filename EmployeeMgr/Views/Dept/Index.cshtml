@@ -1,0 +1,34 @@
+﻿@model IEnumerable<EmployeeMgr.Models.Dept>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.deptName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.deptName)
+        </td>
+        <td>
+            @Html.ActionLink("Update", "Edit", new { id=item.deptId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.deptId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.deptId })
+        </td>
+    </tr>
+}
+
+</table>

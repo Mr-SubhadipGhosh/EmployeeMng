@@ -1,0 +1,35 @@
+﻿@model EmployeeMgr.Models.Employee
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Employee</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.deptOfEmp.deptName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deptOfEmp.deptName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.empName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.empName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.empId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
