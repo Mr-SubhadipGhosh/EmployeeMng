@@ -12,7 +12,7 @@ namespace EmployeeMgr.Models
         [Key]
         public int empId { get; set; }
         public string empName { get; set; }
-        [ForeignKey("Dept")]
+        //[ForeignKey("Dept")]
         public int deptId { get; set; }
 
         public virtual Dept deptOfEmp { get; set; }
