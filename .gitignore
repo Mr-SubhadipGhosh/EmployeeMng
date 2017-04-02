@@ -1,2 +1,5 @@
 EmployeeMgr/bin/**/*.*
 EmployeeMgr/obj/**/*.*
+EmployeeMgr/Migrations/**/*.*
+EmployeeMgr/App_Data/*.mdf
+EmployeeMgr/App_Data/*.ldf

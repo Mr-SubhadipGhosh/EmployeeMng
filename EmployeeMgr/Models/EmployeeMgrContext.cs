@@ -22,6 +22,10 @@ namespace EmployeeMgr.Models
         public System.Data.Entity.DbSet<EmployeeMgr.Models.Dept> Depts { get; set; }
 
         public System.Data.Entity.DbSet<EmployeeMgr.Models.Employee> Employees { get; set; }
+
+        public System.Data.Entity.DbSet<EmployeeMgr.Models.Branch> Branches { get; set; }
+
+        public System.Data.Entity.DbSet<EmployeeMgr.Models.Organization> Organizations { get; set; }
     
     }
 }
