@@ -19,11 +19,18 @@
         @Html.HiddenFor(model => model.deptId)
 
         <div class="form-group">
-            @ViewData["xyz"]
             @Html.LabelFor(model => model.deptName, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.deptName)
                 @Html.ValidationMessageFor(model => model.deptName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.branchId, "branchId", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("branchId", String.Empty)
+                @Html.ValidationMessageFor(model => model.branchId)
             </div>
         </div>
 

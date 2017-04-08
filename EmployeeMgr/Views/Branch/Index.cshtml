@@ -1,0 +1,50 @@
+﻿@model IEnumerable<EmployeeMgr.Models.Branch>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div>
+    @Html.ActionLink("Show list of org", "org", "branch")
+</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.branchOrg.orgName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.branchPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.location)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.branchOrg.orgName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.branchPhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.location)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.branchId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.branchId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.branchId })
+        </td>
+    </tr>
+}
+
+</table>

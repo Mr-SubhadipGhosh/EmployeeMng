@@ -8,14 +8,11 @@ namespace EmployeeMgr.Models
 {
     public class Organization
     {
-        public Organization()
-        {
-            branchList = new List<Branch>();
-        }
+       
         [Key]
         public int orgId { get; set; }
         public int orgParentId { get; set; }
+        [Required]
         public string orgName { get; set; }
-        public virtual ICollection<Branch> branchList { get; set; }
     }
 }

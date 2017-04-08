@@ -2,102 +2,125 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using System.Web.Http.Description;
+using System.Web;
+using System.Web.Mvc;
 using EmployeeMgr.Models;
 
 namespace EmployeeMgr.Controllers
 {
-    public class BranchController : ApiController
+    public class BranchController : Controller
     {
-        private EmployeeMgrContext db = new EmployeeMgrContext();
-
-        // GET api/Branch
-        public IQueryable<Branch> GetBranches()
+        private EmpInfoContext db = new EmpInfoContext();
+        public ActionResult Org()
         {
-            return db.Branches;
+            return View("orgdetails");
+        }
+        // GET: /Branch/
+        public ActionResult Index()
+        {
+            var branches = db.Branches.Include(b => b.branchOrg);
+            return View(branches.ToList());
         }
 
-        // GET api/Branch/5
-        [ResponseType(typeof(Branch))]
-        public IHttpActionResult GetBranch(int id)
+        // GET: /Branch/Details/5
+        public ActionResult Details(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             Branch branch = db.Branches.Find(id);
             if (branch == null)
             {
-                return NotFound();
+                return HttpNotFound();
             }
-
-            return Ok(branch);
+            return View(branch);
         }
 
-        // PUT api/Branch/5
-        public IHttpActionResult PutBranch(int id, Branch branch)
+        // GET: /Branch/Create
+        public ActionResult Create()
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            ViewBag.OrgId = new SelectList(db.Organizations, "orgId", "orgName");
+            return View();
+        }
 
-            if (id != branch.branchId)
+        // POST: /Branch/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include="branchId,branchPhone,location,OrgId")] Branch branch)
+        {
+            if (ModelState.IsValid)
             {
-                return BadRequest();
-            }
-
-            db.Entry(branch).State = EntityState.Modified;
-
-            try
-            {
+                db.Branches.Add(branch);
                 db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!BranchExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return RedirectToAction("Index");
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            ViewBag.OrgId = new SelectList(db.Organizations, "orgId", "orgName", branch.OrgId);
+            return View(branch);
         }
 
-        // POST api/Branch
-        [ResponseType(typeof(Branch))]
-        public IHttpActionResult PostBranch(Branch branch)
+        // GET: /Branch/Edit/5
+        public ActionResult Edit(int? id)
         {
-            if (!ModelState.IsValid)
+            if (id == null)
             {
-                return BadRequest(ModelState);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            db.Branches.Add(branch);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = branch.branchId }, branch);
-        }
-
-        // DELETE api/Branch/5
-        [ResponseType(typeof(Branch))]
-        public IHttpActionResult DeleteBranch(int id)
-        {
             Branch branch = db.Branches.Find(id);
             if (branch == null)
             {
-                return NotFound();
+                return HttpNotFound();
             }
+            ViewBag.OrgId = new SelectList(db.Organizations, "orgId", "orgName", branch.OrgId);
+            return View(branch);
+        }
 
+        // POST: /Branch/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include="branchId,branchPhone,location,OrgId")] Branch branch)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(branch).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.OrgId = new SelectList(db.Organizations, "orgId", "orgName", branch.OrgId);
+            return View(branch);
+        }
+
+        // GET: /Branch/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Branch branch = db.Branches.Find(id);
+            if (branch == null)
+            {
+                return HttpNotFound();
+            }
+            return View(branch);
+        }
+
+        // POST: /Branch/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Branch branch = db.Branches.Find(id);
             db.Branches.Remove(branch);
             db.SaveChanges();
-
-            return Ok(branch);
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
@@ -107,11 +130,6 @@ namespace EmployeeMgr.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        private bool BranchExists(int id)
-        {
-            return db.Branches.Count(e => e.branchId == id) > 0;
         }
     }
 }

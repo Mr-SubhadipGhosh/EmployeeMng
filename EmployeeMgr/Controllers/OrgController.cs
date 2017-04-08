@@ -14,7 +14,7 @@ namespace EmployeeMgr.Controllers
 {
     public class OrgController : ApiController
     {
-        private EmployeeMgrContext db = new EmployeeMgrContext();
+        private EmpInfoContext db = new EmpInfoContext();
 
         // GET api/Org
         public IQueryable<Organization> GetOrganizations()

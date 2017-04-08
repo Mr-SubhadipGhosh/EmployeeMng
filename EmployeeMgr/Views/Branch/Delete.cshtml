@@ -1,4 +1,4 @@
-﻿@model EmployeeMgr.Models.Employee
+﻿@model EmployeeMgr.Models.Branch
 
 @{
     ViewBag.Title = "Delete";
@@ -9,23 +9,31 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Employee</h4>
+    <h4>Branch</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.deptOfEmp.deptName)
+            @Html.DisplayNameFor(model => model.branchOrg.orgName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.deptOfEmp.deptName)
+            @Html.DisplayFor(model => model.branchOrg.orgName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.empName)
+            @Html.DisplayNameFor(model => model.branchPhone)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.empName)
+            @Html.DisplayFor(model => model.branchPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.location)
         </dd>
 
     </dl>

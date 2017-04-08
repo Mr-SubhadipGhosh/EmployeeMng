@@ -173,33 +173,20 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BranchController.cs" />
     <Compile Include="Controllers\DeptController.cs" />
-    <Compile Include="Controllers\EmployeeController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\EmpController.cs" />
     <Compile Include="Controllers\OrgController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201703260657213_InitialCreate.cs" />
-    <Compile Include="Migrations\201703260657213_InitialCreate.Designer.cs">
-      <DependentUpon>201703260657213_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201704011246064_InitialCreate1.cs" />
-    <Compile Include="Migrations\201704011246064_InitialCreate1.Designer.cs">
-      <DependentUpon>201704011246064_InitialCreate1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201704020904557_fgd44.cs" />
-    <Compile Include="Migrations\201704020904557_fgd44.Designer.cs">
-      <DependentUpon>201704020904557_fgd44.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201704021058367_brPh.cs" />
-    <Compile Include="Migrations\201704021058367_brPh.Designer.cs">
-      <DependentUpon>201704021058367_brPh.cs</DependentUpon>
+    <Compile Include="Migrations\201704080907296_dd1.cs" />
+    <Compile Include="Migrations\201704080907296_dd1.Designer.cs">
+      <DependentUpon>201704080907296_dd1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Branch.cs" />
     <Compile Include="Models\Dept.cs" />
+    <Compile Include="Models\EmpInfoContext.cs" />
     <Compile Include="Models\Employee.cs" />
-    <Compile Include="Models\EmployeeMgrContext.cs" />
     <Compile Include="Models\Organization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -236,19 +223,24 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Branch\Create.cshtml" />
+    <Content Include="Views\Branch\Delete.cshtml" />
+    <Content Include="Views\Branch\Details.cshtml" />
+    <Content Include="Views\Branch\Edit.cshtml" />
+    <Content Include="Views\Branch\Index.cshtml" />
     <Content Include="Views\Dept\Create.cshtml" />
     <Content Include="Views\Dept\Delete.cshtml" />
     <Content Include="Views\Dept\Details.cshtml" />
     <Content Include="Views\Dept\Edit.cshtml" />
     <Content Include="Views\Dept\Index.cshtml" />
-    <Content Include="Views\Employee\Create.cshtml" />
-    <Content Include="Views\Employee\Delete.cshtml" />
-    <Content Include="Views\Employee\Details.cshtml" />
-    <Content Include="Views\Employee\Edit.cshtml" />
-    <Content Include="Views\Employee\Index.cshtml" />
+    <Content Include="Views\Emp\Create.cshtml" />
+    <Content Include="Views\Emp\Delete.cshtml" />
+    <Content Include="Views\Emp\Details.cshtml" />
+    <Content Include="Views\Emp\Edit.cshtml" />
+    <Content Include="Views\Emp\Index.cshtml" />
+    <Content Include="Views\Branch\orgdetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -261,17 +253,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201703260657213_InitialCreate.resx">
-      <DependentUpon>201703260657213_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704011246064_InitialCreate1.resx">
-      <DependentUpon>201704011246064_InitialCreate1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704020904557_fgd44.resx">
-      <DependentUpon>201704020904557_fgd44.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704021058367_brPh.resx">
-      <DependentUpon>201704021058367_brPh.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201704080907296_dd1.resx">
+      <DependentUpon>201704080907296_dd1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

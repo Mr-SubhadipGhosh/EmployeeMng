@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "orgdetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>orgdetails</h2>
+<div id="orgList">
+
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        console.log('ready');
+        $.ajax({
+            url: "../api/org", success: function (result) {
+                result.forEach(function (val) {
+                    $("#orgList").append("<div>"+val.orgName+"</div>");
+                });
+            }
+        });
+    });
+</script>

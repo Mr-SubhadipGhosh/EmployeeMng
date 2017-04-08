@@ -10,18 +10,18 @@ using EmployeeMgr.Models;
 
 namespace EmployeeMgr.Controllers
 {
-    public class EmployeeController : Controller
+    public class EmpController : Controller
     {
-        private EmployeeMgrContext db = new EmployeeMgrContext();
+        private EmpInfoContext db = new EmpInfoContext();
 
-        // GET: /Employee/
+        // GET: /Emp/
         public ActionResult Index()
         {
             var employees = db.Employees.Include(e => e.deptOfEmp);
             return View(employees.ToList());
         }
 
-        // GET: /Employee/Details/5
+        // GET: /Emp/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,19 +36,19 @@ namespace EmployeeMgr.Controllers
             return View(employee);
         }
 
-        // GET: /Employee/Create
+        // GET: /Emp/Create
         public ActionResult Create()
         {
-            ViewBag.deptId = new SelectList(db.Depts, "deptId", "deptId");
+            ViewBag.deptId = new SelectList(db.Depts, "deptId", "deptName");
             return View();
         }
 
-        // POST: /Employee/Create
+        // POST: /Emp/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="empId,empName,deptId")] Employee employee)
+        public ActionResult Create([Bind(Include="empId,empName,empDoB,empCreated,deptId,version")] Employee employee)
         {
             if (ModelState.IsValid)
             {
@@ -61,7 +61,7 @@ namespace EmployeeMgr.Controllers
             return View(employee);
         }
 
-        // GET: /Employee/Edit/5
+        // GET: /Emp/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -77,12 +77,12 @@ namespace EmployeeMgr.Controllers
             return View(employee);
         }
 
-        // POST: /Employee/Edit/5
+        // POST: /Emp/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="empId,empName,deptId")] Employee employee)
+        public ActionResult Edit([Bind(Include="empId,empName,empDoB,empCreated,deptId,version")] Employee employee)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +94,7 @@ namespace EmployeeMgr.Controllers
             return View(employee);
         }
 
-        // GET: /Employee/Delete/5
+        // GET: /Emp/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -109,7 +109,7 @@ namespace EmployeeMgr.Controllers
             return View(employee);
         }
 
-        // POST: /Employee/Delete/5
+        // POST: /Emp/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

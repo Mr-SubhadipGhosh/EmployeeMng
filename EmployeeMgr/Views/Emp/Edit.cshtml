@@ -27,10 +27,34 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.empDoB, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.empDoB)
+                @Html.ValidationMessageFor(model => model.empDoB)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.empCreated, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.empCreated)
+                @Html.ValidationMessageFor(model => model.empCreated)
+            </div>
+        </div>
+
+        <div class="form-group">
             @Html.LabelFor(model => model.deptId, "deptId", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("deptId", String.Empty)
                 @Html.ValidationMessageFor(model => model.deptId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.version, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.version)
+                @Html.ValidationMessageFor(model => model.version)
             </div>
         </div>
 

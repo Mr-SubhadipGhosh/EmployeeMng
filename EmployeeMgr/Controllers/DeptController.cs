@@ -12,12 +12,13 @@ namespace EmployeeMgr.Controllers
 {
     public class DeptController : Controller
     {
-        private EmployeeMgrContext db = new EmployeeMgrContext();
+        private EmpInfoContext db = new EmpInfoContext();
 
         // GET: /Dept/
         public ActionResult Index()
         {
-            return View(db.Depts.ToList());
+            var depts = db.Depts.Include(d => d.deptBranch);
+            return View(depts.ToList());
         }
 
         // GET: /Dept/Details/5
@@ -38,6 +39,7 @@ namespace EmployeeMgr.Controllers
         // GET: /Dept/Create
         public ActionResult Create()
         {
+            ViewBag.branchId = new SelectList(db.Branches, "branchId", "branchPhone");
             return View();
         }
 
@@ -46,7 +48,7 @@ namespace EmployeeMgr.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="deptId,deptName")] Dept dept)
+        public ActionResult Create([Bind(Include="deptId,deptName,branchId")] Dept dept)
         {
             if (ModelState.IsValid)
             {
@@ -55,13 +57,13 @@ namespace EmployeeMgr.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.branchId = new SelectList(db.Branches, "branchId", "branchPhone", dept.branchId);
             return View(dept);
         }
 
         // GET: /Dept/Edit/5
         public ActionResult Edit(int? id)
         {
-            ViewBag.xyz = "123";
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -71,6 +73,7 @@ namespace EmployeeMgr.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.branchId = new SelectList(db.Branches, "branchId", "branchPhone", dept.branchId);
             return View(dept);
         }
 
@@ -78,8 +81,8 @@ namespace EmployeeMgr.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        //[ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="deptId,deptName")] Dept dept)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include="deptId,deptName,branchId")] Dept dept)
         {
             if (ModelState.IsValid)
             {
@@ -87,6 +90,7 @@ namespace EmployeeMgr.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.branchId = new SelectList(db.Branches, "branchId", "branchPhone", dept.branchId);
             return View(dept);
         }
 
